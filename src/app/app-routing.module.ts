@@ -1,16 +1,18 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthComponent } from './auth/auth.component';
+import { AppComponent } from './app.component';
 
 const routes: Routes = [
-  {path: 'auth', loadChildren: () => import('./auth/auth-routing.module').then(a => a.AuthRoutingModule)},
-  {path: 'pages', loadChildren: () => import('./pages/pages-routing.module').then(p => p.PagesRoutingModule)},
-  { path: '', redirectTo: 'auth', pathMatch: 'full' },
-  { path: '**', redirectTo: 'auth' },
+  { path: '', component: AppComponent },
+  { path: 'auth', loadChildren: () => import('./auth/auth-routing.module').then(a => a.AuthRoutingModule)},
+  { path: 'pages', loadChildren: () => import('./pages/pages-routing.module').then(p => p.PagesRoutingModule)},
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+
+  auth: string = 'auth'
+}

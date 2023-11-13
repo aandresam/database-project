@@ -1,0 +1,105 @@
+
+<ion-spinner *ngIf="loading" class="ion-spinner" name="lines"></ion-spinner>
+<div [ngClass]="{'opacity-30 bg-slate-200': loading}" class="container-routing">
+  <div class="relative m-3">
+      <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+          <svg class="w-4 h-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+          </svg>
+      </div>
+      <input type="text" id="search-input" class="block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-cyan-700 focus:border-cyan-700" placeholder="Search for users">
+  </div>
+
+  <table class="w-full text-sm text-left text-black ">
+      <thead class="text-xs text-cyan-700 bg-slate-200">
+          <tr>
+              <th *ngFor="let item of DataHeaders" scope="col" class="min-w-[190px] max-w-[190px] text-center px-6 py-3">
+                {{ item }}
+              </th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let item of Modules; let i = index" class="tbody_tr">
+
+              <th scope="row" class="tbody_tr_th">
+                <input [ngClass]="{'block': item.moduleId === ModuleToEdit, 'hidden': item.moduleId !== ModuleToEdit}" type="text" [(ngModel)]="item.moduleName" [value]="item.moduleName" class="form-input">
+                <span [ngClass]="{'hidden': item.moduleId === ModuleToEdit}">{{ item.moduleName }}</span>
+              </th>
+
+              <th scope="row" class="tbody_tr_th">
+                <ion-icon class="text-3xl" name="{{item.iconUrl}}"></ion-icon>
+              </th>
+
+              <th scope="row" class="tbody_tr_th">
+                <div [ngClass]="{'block': item.moduleId === ModuleToEdit, 'hidden': item.moduleId !== ModuleToEdit}" class="flex">
+                  <input type="text" [(ngModel)]="item.iconUrl" [value]="item.iconUrl" class="rounded-none max-w-[calc(73.5%-0.90rem)] rounded-s-lg bg-gray-50 border border-gray-300 text-gray-900 focus:ring-cyan-500 focus:border-cyan-500 block flex-1 min-w-0 text-sm p-2.5">
+                  <span class="inline-flex items-center cursor-pointer text-lg px-[0.90rem] text-gray-900 bg-slate-200 border border-s-0 border-slate-300 rounded-e-md">
+                    <ion-icon name="logo-ionic"></ion-icon>
+                  </span>
+                </div>
+                <!-- <input [ngClass]="{'block': item.moduleId === ModuleToEdit, 'hidden': item.moduleId !== ModuleToEdit}" type="text" [(ngModel)]="item.iconUrl" [value]="item.iconUrl" class="form-input"> -->
+                <span [ngClass]="{'hidden': item.moduleId === ModuleToEdit}">{{ item.iconUrl }}</span>
+              </th>
+
+              <th scope="row" class="tbody_tr_th">
+                <input [ngClass]="{'block': item.moduleId === ModuleToEdit, 'hidden': item.moduleId !== ModuleToEdit}" type="text" [(ngModel)]="item.description" [value]="item.description" class="form-input">
+                <span [ngClass]="{'hidden': item.moduleId === ModuleToEdit}">{{ item.description }}</span>
+              </th>
+
+              <th scope="row" class="tbody_tr_th">
+                <span>{{ item.url }}</span>
+              </th>
+
+              <th scope="row" class="tbody_tr_th">
+                <div [ngClass]="{'hidden': item.moduleId === UpdatingModuleId}">
+                  <ion-icon [ngClass]="{'hidden': item.moduleId === ModuleToEdit, 'text-gray-500 cursor-not-allowed': (item.moduleId !== ModuleToEdit) && (ModuleToEdit > 0) || (UpdatingModuleId && UpdatingModuleId > 0), 'cursor-pointer active:scale-[.8]': !ModuleToEdit}" class="icon-edit text-2xl font-bold" (click)="fnEditModule(item.moduleId)" name="create-outline"></ion-icon>
+                  <ion-icon [ngClass]="{'hidden': item.moduleId !== ModuleToEdit}" class="icon-edit cursor-pointer text-3xl text-cyan-700 mx-[5px] font-bold" (click)="fnSaveModule(item)" name="checkmark-outline"></ion-icon>
+                  <ion-icon [ngClass]="{'hidden': item.moduleId !== ModuleToEdit}" class="icon-edit cursor-pointer text-3xl mx-[5px] font-bold text-red-700" (click)="fnCancelEdit(item.moduleId)" name="close-outline"></ion-icon>
+                </div>
+                <div >
+                  <ion-spinner [ngClass]="{'hidden': item.moduleId !== UpdatingModuleId}"  class="ion-spinner-container" name="lines"></ion-spinner>
+                </div>
+              </th>
+
+          </tr>
+      </tbody>
+  </table>
+  <nav class="absolute bottom-3 border-t left-2 right-2 flex items-center justify-between pt-4" aria-label="Table navigation">
+      <span class="text-sm font-normal text-gray-500">
+        Mostrando
+        <span class="font-semibold text-gray-900">
+          1 - {{ TotalRecords }}
+        </span>
+          de
+        <span class="font-semibold text-gray-900 ">
+          {{ TotalRecords }}
+        </span>
+      </span>
+      <ul class="inline-flex -space-x-px text-sm h-8">
+          <li>
+              <a href="#" class="flex items-center justify-center px-3 h-8 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700">Previous</a>
+          </li>
+          <li>
+              <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700">1</a>
+          </li>
+          <li>
+              <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700">2</a>
+          </li>
+          <li>
+              <a href="#" aria-current="page" class="flex items-center justify-center px-3 h-8 text-cyan-700 border border-gray-300 bg-blue-50 hover:bg-blue-100 hover:text-cyan-800">3</a>
+          </li>
+          <li>
+              <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700">4</a>
+          </li>
+          <li>
+              <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700">5</a>
+          </li>
+          <li>
+              <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700">Next</a>
+          </li>
+      </ul>
+  </nav>
+</div>
+
+
+

@@ -1,1 +1,3 @@
-<p>btn works!</p>
+<button [ngClass]="{'btn': submit, 'btn-secondary': !submit}" [style.width]="btnwidth" [style.height]="btnheigth">
+  <ng-content ></ng-content>
+</button>

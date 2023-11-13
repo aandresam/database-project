@@ -1,0 +1,82 @@
+.navigation {
+  @apply fixed h-full max-sm:max-w-[80px] bg-cyan-700 border-l-[10px] border-cyan-700 overflow-hidden;
+  transition: 0.5s;
+}
+.navigation.active {
+  width: 80px;
+}
+
+.navigation_ul {
+  @apply absolute top-0 left-0 w-full;
+}
+
+.navigation_ul_li {
+  @apply relative w-full list-none cursor-pointer rounded-tl-[30px] rounded-bl-[30px] select-none;
+}
+
+.navigation_ul_li:hover,
+.navigation_ul_li.hovered {
+  background-color: var(--white);
+}
+
+.navigation_ul_li:active,
+.navigation_ul_li.active {
+  background-color: var(--white);
+}
+
+.navigation_ul li:nth-child(1) {
+  margin-bottom: 40px;
+  pointer-events: none;
+}
+
+.navigation_ul_li_a {
+  @apply relative flex w-full text-white no-underline;
+
+}
+.navigation_ul li:hover a,
+.navigation_ul li.hovered a {
+  @apply text-cyan-700;
+}
+
+.navigation_ul li:active a,
+.navigation_ul li.active a {
+  @apply text-cyan-700;
+}
+
+.navigation_ul_li_a .icon {
+  @apply relative block min-w-[60px] h-[60px] leading-[75px] text-center;
+}
+.navigation_ul_li_a .icon ion-icon {
+  font-size: 1.75rem;
+}
+
+.navigation_ul_li_a .title {
+  @apply relative block py-0 px-[10px] h-[60px] leading-[60px] text-start whitespace-nowrap;
+}
+
+/* --------- curve outside ---------- */
+.navigation ul li:hover a::before,
+.navigation ul li.hovered a::before {
+  content: "";
+  @apply absolute right-0 top-[-50px] w-[50px] h-[50px] bg-transparent rounded-[50%] pointer-events-none;
+  box-shadow: 35px 35px 0 10px var(--white);
+}
+.navigation ul li:hover a::after,
+.navigation ul li.hovered a::after {
+  content: "";
+  @apply absolute right-0 bottom-[-50px] w-[50px] h-[50px] bg-transparent rounded-[50%] pointer-events-none;
+  box-shadow: 35px -35px 0 10px var(--white);
+}
+
+.navigation ul li:active a::before,
+.navigation ul li.active a::before {
+  content: "";
+  @apply absolute right-0 top-[-50px] w-[50px] h-[50px] bg-transparent rounded-[50%] pointer-events-none;
+  box-shadow: 35px 35px 0 10px var(--white);
+}
+.navigation ul li:active a::after,
+.navigation ul li.active a::after {
+  content: "";
+  @apply absolute right-0 bottom-[-50px] w-[50px] h-[50px] bg-transparent rounded-[50%] pointer-events-none;
+  box-shadow: 35px -35px 0 10px var(--white);
+}

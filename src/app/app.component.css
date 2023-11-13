@@ -1,0 +1,13 @@
+.logged{
+  @apply absolute top-[70px] left-[310px] right-[-10px] w-[calc(100%-320px)] h-[calc(100%-80px)] shadow p-3;
+  transition: 0.5s;
+}
+.notLogged{
+  @apply bg-cyan-500 w-[100vw] h-[100vh] p-8;
+}
+.full-w{
+  @apply absolute w-[calc(100%-100px)] left-[90px] right-[-10px];
+}
+.mid-w{
+  @apply absolute w-[calc(100%-320px)] left-[310px] right-[-10px];
+}

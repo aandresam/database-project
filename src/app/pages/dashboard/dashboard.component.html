@@ -1,1 +1,5 @@
-<app-sidebar></app-sidebar>
+<ion-spinner *ngIf="loading" class="ion-spinner" name="lines"></ion-spinner>
+<div [ngClass]="{'opacity-30 bg-slate-200': loading}" class="container-routing">
+  <h1>Dashboard works!</h1>
+  <app-btn [submit]="false">Hola</app-btn>
+</div>
